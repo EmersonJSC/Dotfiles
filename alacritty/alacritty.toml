@@ -1,4 +1,3 @@
-import = ["/home/emersonjsc/.config/colorfig/generated/alacritty.yml"]
 
 [cursor]
 style = "Beam"
@@ -87,3 +86,6 @@ mods = "Control|Alt"
 
 [window]
 opacity = 0.95
+
+[general]
+import = ["/home/emersonjsc/.config/colorfig/generated/alacritty.yml"]

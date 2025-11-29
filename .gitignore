@@ -3,4 +3,4 @@
 
 # Exceto a pasta hypr
 !/hypr/
-
+!/waybar/
