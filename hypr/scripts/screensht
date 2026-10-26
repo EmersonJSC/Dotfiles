@@ -9,14 +9,14 @@ _LOG_FILE_="$_SCREENSHOT_DIR_/.screensht.log"
 # Color
 _FG_COLOR_='#d3c2f5'
 _BG_COLOR_='#cdd6f4'
-_BG_SIZE_=10
+_BG_SIZE_=2
 # Border Size Applied when value greater than or equal 3
 _BORDER_SIZE_=0
 _SHADOW_SIZE_='100x40+0+16'  # [ weight ] x [ radius ] + [ horizontal ] x [ vertical ]
 _ROUNDED_CORNER_=8
 # Author Config
 _AUTHOR_POST_=( 'South' '+0+15' )
-_AUTHOR_NAME_=" $USER"
+_AUTHOR_NAME_=""
 _AUTHOR_COLOR_='#1e1e2e'
 # Get Lists Font With "convert -list font | grep -iE 'font:.*' | nl"
 _FONT_SIZE_=12
@@ -102,7 +102,31 @@ function summary() {
     hours=$((_runtime_job_ / 3600)); minutes=$(( (_runtime_job_ % 3600) / 60 )); seconds=$(( (_runtime_job_ % 3600) % 60 ))
 
     if [[ $3 != "failed" ]]; then
-        wl-copy < "$_target_file_" >> $_LOG_FILE_ 2>&1
+        # Copy as PNG to clipboard
+        # Tentamos preencher tanto clipboard X11 (xclip) quanto Wayland (wl-copy), se existirem.
+        _clipboard_ok_=0
+
+        if command -v xclip >/dev/null 2>&1; then
+            echo "Usando xclip para copiar imagem para o clipboard" >> "$_LOG_FILE_"
+            if xclip -selection clipboard -t image/png -i "$_target_file_" >> $_LOG_FILE_ 2>&1; then
+                _clipboard_ok_=1
+            else
+                echo "xclip failed" >> "$_LOG_FILE_"
+            fi
+        fi
+
+        if command -v wl-copy >/dev/null 2>&1; then
+            echo "Usando wl-copy para copiar imagem para o clipboard" >> "$_LOG_FILE_"
+            if wl-copy --type image/png < "$_target_file_" >> $_LOG_FILE_ 2>&1; then
+                _clipboard_ok_=1
+            else
+                echo "wl-copy failed" >> "$_LOG_FILE_"
+            fi
+        fi
+
+        if [[ $_clipboard_ok_ -eq 0 ]]; then
+            echo "Nenhuma cópia para clipboard foi bem sucedida (xclip/wl-copy)" >> "$_LOG_FILE_"
+        fi
 
         message="${_notif_message_} Runtime: $hours hours, $minutes minutes, $seconds seconds"
         dunstify -i "$_target_file_" -t 10000 "Screenshot Tool" "$message" -a "Screenshot Tool"
@@ -144,9 +168,11 @@ then
 elif [ "$1" = 'full' ];
 then
 	msg="Full screenshot saved and copied to clipboard!"
-	main 'grimblast copysave output' "${msg}"
+	# Usamos apenas 'save'; o script cuida do clipboard depois
+	main 'grimblast save output' "${msg}"
 elif [ "$1" = 'area' ];
 then
 	msg='Area screenshot saved and copied to clipboard!'
-	main 'grimblast copysave area' "${msg}"
+	# Usamos apenas 'save'; o script cuida do clipboard depois
+	main 'grimblast save area' "${msg}"
 fi

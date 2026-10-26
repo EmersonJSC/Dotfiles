@@ -1,3 +1,6 @@
+[general]
+import = ["themes/noctalia.toml"]
+
 
 [cursor]
 style = "Beam"
@@ -85,7 +88,76 @@ key = "Equals"
 mods = "Control|Alt"
 
 [window]
-opacity = 0.95
+opacity = 0.98
 
-[general]
-import = ["/home/emersonjsc/.config/colorfig/generated/alacritty.yml"]
+[colors.primary]
+foreground = "#ffffff"
+background = "#1e1e1e"
+dim_foreground = "#8e8e93"
+bright_foreground = "#ffffff"
+
+[colors.cursor]
+text = "#1e1e1e"
+cursor = "#0a84ff"
+
+[colors.vi_mode_cursor]
+text = "#1e1e1e"
+cursor = "#0a84ff"
+
+[colors.search.matches]
+foreground = "#8e8e93"
+background = "#2c2c2e"
+
+[colors.search.focused_match]
+foreground = "#ffffff"
+background = "#0a84ff"
+
+[colors.hints.start]
+foreground = "#8e8e93"
+background = "#1e1e1e"
+
+[colors.hints.end]
+foreground = "#636366"
+background = "#1e1e1e"
+
+[colors.line_indicator]
+foreground = "None"
+background = "None"
+
+[colors.footer_bar]
+foreground = "#ffffff"
+background = "#1e1e1e"
+
+[colors.selection]
+text = "#ffffff"
+background = "#48484a"
+
+[colors.normal]
+black = "#1e1e1e"
+red = "#ff453a"
+green = "#30d158"
+yellow = "#ff9f0a"
+blue = "#0a84ff"
+magenta = "#bf5af2"
+cyan = "#64d2ff"
+white = "#ffffff"
+
+[colors.bright]
+black = "#48484a"
+red = "#ff6961"
+green = "#30d158"
+yellow = "#ffd60a"
+blue = "#0a84ff"
+magenta = "#bf5af2"
+cyan = "#64d2ff"
+white = "#ffffff"
+
+[colors.dim]
+black = "#48484a"
+red = "#ff453a"
+green = "#30d158"
+yellow = "#ff9f0a"
+blue = "#0a84ff"
+magenta = "#bf5af2"
+cyan = "#64d2ff"
+white = "#8e8e93"
