@@ -1,6 +1,51 @@
-# Ignorar tudo
+# Dotfiles: política de lista permitida.
+# Tudo fica ignorado por padrão; só configurações visuais e de aplicativos
+# básicos explicitamente liberadas abaixo podem ser adicionadas ao repositório.
 *
 
-# Exceto a pasta hypr
+# Manter esta política versionada.
+!/.gitignore
+
+# Terminal
+!/alacritty/
+!/alacritty/*.toml
+!/alacritty/*.yml
+
+# Ambiente gráfico (Hyprland) e pequenos utilitários chamados pelos atalhos.
 !/hypr/
+!/hypr/*.conf
+!/hypr/*.sh
+!/hypr/scripts/
+!/hypr/scripts/cliphist.sh
+!/hypr/scripts/colorpicker
+!/hypr/scripts/dontkillsteam.sh
+!/hypr/scripts/gamemode.sh
+!/hypr/scripts/modeswitch.sh
+!/hypr/scripts/resetxdgportal.sh
+!/hypr/scripts/screensht
+!/hypr/scripts/systemupdate.sh
+!/hypr/scripts/themeselect.sh
+!/hypr/scripts/themeswitch.sh
+!/hypr/scripts/volumecontrol.sh
+
+# Barra de status
 !/waybar/
+!/waybar/*.css
+
+# Exemplos que devem continuar privados (perfis, sessões, caches e credenciais).
+/firefox/
+/chromium/
+/google-chrome/
+/BraveSoftware/
+/mozilla/
+**/cache/
+**/Cache/
+**/session*/
+**/*cookies*
+**/*credential*
+**/*password*
+**/*secret*
+**/*.key
+**/*.pem
+**/*.p12
+**/*.kdbx
